@@ -26,7 +26,7 @@ repositories {
 }
 task print(){
     doLast {
-        println "github push complete bananaaaaaaaa"
+        println "github push complete banaasdsadanaaaaaaaa"
     }
 }
 
