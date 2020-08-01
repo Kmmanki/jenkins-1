@@ -26,13 +26,26 @@ repositories {
 }
 task print(){
     doLast {
-        println "github push complete banaasdsadsanaaaaaaaa"
+        println "github push complete sanaaaaaaaa"
     }
 }
+
+
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.projectlombok:lombok')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+
+mainClassName = "hello.HelloWorld"
+version = "1.0"
+
+jar {
+    manifest {
+        attributes 'Main-Class' : 'hello.HelloWorld', 'Version' : 1.0
+    }
+    archiveName "HelloWorld.jar"
 }
