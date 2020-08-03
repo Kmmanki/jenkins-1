@@ -111,7 +111,41 @@ Branches to build -> 빌드할 브랜치 설정 (일단 마스터브랜치로 �
 
 
 build -> add build step 선택 -> excute shell
-command에 ./gradlew clean print 입력 (빌드 커맨드로 maven이나 일반 java라면 달라질 수 있다. )
+command에 ./gradlew clean print 입력 (빌드 커맨드로 maven이나 일반 java라면 달라질 수 있다. ) 저장
 
 <img width="775" alt="스크린샷 2020-08-03 오후 12 45 36" src="https://user-images.githubusercontent.com/50133267/89143934-3f72a280-d587-11ea-9ea0-2e5d621d6ed5.png">
+
+
+github에 웹훅을 적용해야한다. 그러나 웹훅 적용 시 url이 필요하다. 이를 해결하기위해 ngrok을 사용한다.
+ngrok은 아이피+port를 url로 사용할 수 있게 해준다
+ngrok 설치 후 해당 디렉토리로 이동하여 아래 커맨드를 실행 한다.
+./ngrok http 32760
+
+![스크린샷 2020-08-03 오후 1 02 21](https://user-images.githubusercontent.com/50133267/89144767-9aa59480-d589-11ea-9728-a23d473cf8a3.png)
+
+
+![스크린샷 2020-08-03 오후 1 03 33](https://user-images.githubusercontent.com/50133267/89144816-c4f75200-d589-11ea-8ab1-78ecc04dca2d.png)
+
+
+http://05f0f56a3f40.ngrok.io 가 나의 젠킨스 주소가 되는것이다. 
+해당 url을 브라우저에 넣으면 젠킨스로 접속 가능할 것이다.
+이제 깃허브에 젠킨스 웹훅을 설정하자.
+
+
+github -> 할당한 레퍼지토리 -> settings -> webhooks -> add webhook -> payload에
+http://05f0f56a3f40.ngrok.io/github-webhook/
+처럼 뒤에 /github-webhook/을 넣어서 저장하자
+
+
+4. 프로잭트를 push하여 자동빌드 되는지 확인하자
+프로젝트를 깃허브에 푸쉬하면 빌드 대기목록에 해당 프로젝트가 나온다!
+
+
+<img width="1059" alt="스크린샷 2020-08-03 오후 1 18 22" src="https://user-images.githubusercontent.com/50133267/89148149-f6751b00-d593-11ea-927c-62521af58134.png">
+
+
+젠킨스 내부의 해당 프로젝트의 콘솔을 확인하면 gredle.build에 넣은 print를 확인 할 수 있다.
+
+<img width="1319" alt="스크린샷 2020-08-03 오후 2 20 58" src="https://user-images.githubusercontent.com/50133267/89148409-ad719680-d594-11ea-8217-a9e5c1d11dcd.png">
+
 
