@@ -67,8 +67,51 @@ cat /var/jenkins_home/secrets/initialAdminPassword
 
 인스톨 화면이 나오고 여러 플러그인을 인스톨한다. 만약 여기서 Folders 인스톨이 잘 진행이 안된다면 jenkins/jenkins 이미지가 아닌 jenkins 이미지가 아닌지 확인해보자
 
+![스크린샷 2020-08-03 오후 12 22 24](https://user-images.githubusercontent.com/50133267/89142985-0a188580-d584-11ea-9db9-1ec87141d910.png)
+
+
+이후 계정 생성을 한뒤 로그인 하면
+
+![스크린샷 2020-08-03 오후 12 25 45](https://user-images.githubusercontent.com/50133267/89143136-7b583880-d584-11ea-9927-15c5837b8955.png)
+
+젠킨스 인스톨이 되었다!
 
 
 
+3. jenkins와 github연동
 
+좌측 상단 새로운 아이템 -> freeStyle Project -> OK
+
+![스크린샷 2020-08-03 오후 12 29 48](https://user-images.githubusercontent.com/50133267/89143299-0df8d780-d585-11ea-9dfa-486e4ef2fa89.png)
+
+general tap에 깃허브 클릭 -> 자신의 깃허브 레퍼지토리 url
+
+소스코드관리 -> 깃 체크 -> 자신의 깃허브 레퍼지토리 url
+
+![스크린샷 2020-08-03 오후 12 34 48](https://user-images.githubusercontent.com/50133267/89143563-fec65980-d585-11ea-9436-4781628d3db4.png)
+
+소스코드 관리 -> 깃체크 -> credentials -> add -> jenkins
+
+userName : github Id
+password : github PW
+
+이후 add
+
+
+<img width="994" alt="스크린샷 2020-08-03 오후 12 39 03" src="https://user-images.githubusercontent.com/50133267/89143711-7a280b00-d586-11ea-904e-9efe0b78b4e5.png">
+
+ceredentials 를 방금 설정한 것으로 변경
+
+Branches to build -> 빌드할 브랜치 설정 (일단 마스터브랜치로 했다.)
+
+
+빌드유발 -> github hook trigger for GTIScm Polling
+
+<img width="1052" alt="스크린샷 2020-08-03 오후 12 42 56" src="https://user-images.githubusercontent.com/50133267/89143844-e571dd00-d586-11ea-94d7-1d46a8da9692.png">
+
+
+build -> add build step 선택 -> excute shell
+command에 ./gradlew clean print 입력 (빌드 커맨드로 maven이나 일반 java라면 달라질 수 있다. )
+
+<img width="775" alt="스크린샷 2020-08-03 오후 12 45 36" src="https://user-images.githubusercontent.com/50133267/89143934-3f72a280-d587-11ea-9ea0-2e5d621d6ed5.png">
 
