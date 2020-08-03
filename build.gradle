@@ -24,9 +24,10 @@ repositories {
     mavenCentral()
     jcenter()
 }
+
 task print(){
     doLast {
-        println "github push complete hahahahahahahaha"
+        println "github push complete hhohohoho"
     }
 }
 
